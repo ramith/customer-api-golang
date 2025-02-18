@@ -1,0 +1,65 @@
+openapi: 3.0.0
+servers:
+  - description: Customer API
+    url: http://localhost:8080
+info:
+  description: "CRUD Operations for customer"
+  version: "1.0.0"
+  title: "Customer API"
+  contact:
+    email: "choreo-help@wso2.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+tags:
+  - name: "customer"
+    description: "customer api"
+  - name: "demo"
+    description: "This api is created for demo purposes"
+paths:
+  /customer/{accountId}:
+    get:
+      summary: "Retrieve a customer by id"
+      operationId: "getCustomerById"
+      description: |
+        Retrieve a customer by account id.
+      parameters:
+        - name: accountId
+          in: path
+          description: "Customer account Id"
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "The Customer with Id"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+
+        "404":
+          description: "Unable to find the Customer"
+
+components:
+  schemas:
+    Customer:
+      type: object
+      required:
+        - accountId
+        - firstName
+        - lastName
+        - kycStatus
+      properties:
+        accountId:
+          type: string
+          example: "1"
+        firstName:
+          type: string
+          example: "John"
+        lastName:
+          type: string
+          example: "Smith"
+        kycStatus:
+          type: string
+          example: "verified"
