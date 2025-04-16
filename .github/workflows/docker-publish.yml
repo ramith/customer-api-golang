@@ -36,3 +36,15 @@ jobs:
           docker push ramithj/customer-api-golang:${{ github.sha }}
           docker tag ramithj/customer-api-golang:${{ github.sha }} ramithj/customer-api-golang:latest
           docker push ramithj/customer-api-golang:latest
+
+      - name: Deploy to Choreo
+        run: |
+          curl --location --request POST 'https://apis.choreo.dev/devops/1.0.0/external-ci/deploy' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{
+            "component_id": "35ccbc4c-c84d-4ca8-866c-4601e4c8d234",
+            "version_id": "3006a6d1-e8e7-429b-929d-29e21c4eade4",
+            "image": "<INSERT_IMAGE>",
+            "token": "${{ secrets.CHOREO_TOKEN }}"
+          }'
+
