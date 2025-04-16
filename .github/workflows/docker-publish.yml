@@ -19,7 +19,7 @@ jobs:
 
       - name: Build Go binary
         run: |
-          cd customer-api-golang-main
+          cd customer-api-golang
           go build -o app main.go
 
       - name: Log in to Docker Hub
