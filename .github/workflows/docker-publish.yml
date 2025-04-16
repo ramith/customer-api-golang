@@ -19,7 +19,6 @@ jobs:
 
       - name: Build Go binary
         run: |
-          cd customer-api-golang
           go build -o app main.go
 
       - name: Log in to Docker Hub
@@ -30,9 +29,11 @@ jobs:
 
       - name: Build Docker image
         run: |
-          cd customer-api-golang-main
           echo -e 'FROM golang:1.22-alpine\nWORKDIR /app\nCOPY app .\nCMD ["./app"]' > Dockerfile
           docker build -t ramithj/customer-api-golang:${{ github.sha }} .
 
       - name: Push Docker image
-        run: docker push ramithj/customer-api-golang:${{ github.sha }}
+        run: |
+          docker push ramithj/customer-api-golang:${{ github.sha }}
+          docker tag ramithj/customer-api-golang:${{ github.sha }} ramithj/customer-api-golang:latest
+          docker push ramithj/customer-api-golang:latest
