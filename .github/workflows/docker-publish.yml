@@ -29,7 +29,6 @@ jobs:
 
       - name: Build Docker image
         run: |
-          echo -e 'FROM golang:1.22-alpine\nWORKDIR /app\nCOPY app .\nCMD ["./app"]' > Dockerfile
           docker build -t ramithj/customer-api-golang:${{ github.sha }} .
 
       - name: Push Docker image
