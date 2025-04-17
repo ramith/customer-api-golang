@@ -42,8 +42,8 @@ jobs:
           curl --location --request POST 'https://apis.choreo.dev/devops/1.0.0/external-ci/deploy' \
           --header 'Content-Type: application/json' \
           --data-raw '{
-            "component_id": "fe0ad066-9373-423c-9b69-14e15f945c70",
-            "version_id": "86901837-0864-4024-9f0b-95b543a066c6",
+            "component_id": "d67fc01b-0232-403d-9e29-1b6988de3f92",
+            "version_id": "7e7e2486-e1c0-4219-994d-94e5adbcfba3",
             "image": "registry.docker.com/ramithj/customer-api-golang:${{ github.sha }}",
             "token": "${{ secrets.CHOREO_TOKEN }}"
           }'
