@@ -44,7 +44,7 @@ jobs:
           --data-raw '{
             "component_id": "35ccbc4c-c84d-4ca8-866c-4601e4c8d234",
             "version_id": "3006a6d1-e8e7-429b-929d-29e21c4eade4",
-            "image": "docker.io/ramithj/customer-api-golang:${{ github.sha }}",
+            "image": "registry.docker.com/ramithj/customer-api-golang:${{ github.sha }}",
             "token": "${{ secrets.CHOREO_TOKEN }}"
           }'
 
