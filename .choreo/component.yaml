@@ -1,4 +1,4 @@
-schemaVersion: 1.1
+schemaVersion: 1.2
 
 # +required Incoming connection details for the component
 endpoints:
