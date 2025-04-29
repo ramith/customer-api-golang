@@ -12,13 +12,11 @@ import (
 )
 
 const (
-	dbName     = "customerdb"
 	tableName  = "customer"
 	serverPort = 8080
 )
 
 // Customer represents the database model
-// Struct fields are aligned with OpenAPI spec
 type Customer struct {
 	AccountID string `json:"accountId" gorm:"column:account_id;primaryKey"`
 	FirstName string `json:"firstName" gorm:"column:first_name"`
@@ -29,10 +27,13 @@ type Customer struct {
 var db *gorm.DB
 
 func init() {
-	host := os.Getenv("MYSQL_HOST")
-	user := os.Getenv("MYSQL_USER")
-	password := os.Getenv("MYSQL_PWD")
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?charset=utf8mb4&parseTime=True&loc=Local&tls=skip-verify", user, password, host, dbName)
+	hostname := os.Getenv("CHOREO_CUSTOMERDB_HOSTNAME")
+	port := os.Getenv("CHOREO_CUSTOMERDB_PORT")
+	username := os.Getenv("CHOREO_CUSTOMERDB_USERNAME")
+	password := os.Getenv("CHOREO_CUSTOMERDB_PASSWORD")
+	databasename := os.Getenv("CHOREO_CUSTOMERDB_DATABASENAME")
+
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local&tls=skip-verify", username, password, hostname, port, databasename)
 	var err error
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
@@ -55,7 +56,7 @@ func getCustomerByID(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"accountId": customer.AccountID,
 		"firstName": customer.FirstName,
-		"lastName": customer.LastName,
+		"lastName":  customer.LastName,
 		"kycStatus": customer.KYCStatus,
 	})
 }

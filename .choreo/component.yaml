@@ -24,3 +24,8 @@ endpoints:
     # This is only applicable to REST or WS endpoint types.
     # The path should be relative to the docker context.
     schemaFilePath: openapi.yaml
+
+dependencies:
+    connectionReferences:
+    - name: customerdb
+      resourceRef: database:customer-data/customerdb
